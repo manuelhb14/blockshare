@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 import { ethers } from 'ethers';
+import { NavLink, Router, Routes, Route } from 'react-router-dom';
 
 export default function Navbar() {
 
@@ -46,17 +47,21 @@ export default function Navbar() {
   }
 
   return (
-      <div className="">
-        <img src="/logo192.png" alt="logo" width={20} height={20} />
+      <nav className="">
+        <NavLink to='/'>
+          <img src="/logo192.png" alt="logo" width={20} height={20} />
+        </NavLink>
         <img src="/bell.svg" alt="bell" width={20} height={20} />
-        <button onClick="">Dashboard</button>
+        <NavLink to='/dashboard'>
+          Dashboard
+        </NavLink>
         <button onClick="">Create Expense</button>
         {isConnected ? (
           <button onClick="">{formatAddress(address)}</button>
         ) : (
           <button onClick={connect}>Connect</button>
         )}
-      </div>
+      </nav>
   );
 }
 

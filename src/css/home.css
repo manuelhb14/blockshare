@@ -1,0 +1,13 @@
+body {
+    background-image: url('../../public/img/bg-color.png');
+    width: 100vw;
+    height: 100vh;
+    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-img {
+    height:200px;
+    width: auto;
+}
