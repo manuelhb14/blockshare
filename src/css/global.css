@@ -1,13 +1,14 @@
 /* Font imports */
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Regular.ttf') format('ttf'); font-weight: normal; }
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Bold.ttf') format('ttf'); font-weight: bold; }
-@font-face { font-family: 'Biotif-m'; src: url('../../public/font/Biotif-Medium.ttf') format('ttf'); font-weight: medium; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Regular.ttf'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Bold.ttf'); font-weight: bold; font-style: normal; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Medium.ttf'); font-weight: medium; font-style: normal; }
 
 *, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Biotif';
+    overflow-x: hidden;
 }
 
 :root {
