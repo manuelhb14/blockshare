@@ -1,7 +1,7 @@
 /* Font imports */
 @font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Regular.ttf') format('ttf'); font-weight: normal; }
 @font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Bold.ttf') format('ttf'); font-weight: bold; }
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Medium.ttf') format('ttf'); font-weight: medium; }
+@font-face { font-family: 'Biotif-m'; src: url('../../public/font/Biotif-Medium.ttf') format('ttf'); font-weight: medium; }
 
 *, body {
     margin: 0;
@@ -13,14 +13,16 @@
 :root {
     --white: #ffffff;
     --blue: #00B2C1;
+    --darkblue: #04a5b4;
     --lightblue: #DDFCFF;
     --black: #1F1F1F;
     --yellow: #EBB02A;
     --green: #00C177;
-    --filterblue: filter: invert(59%) sepia(33%) saturate(6893%) hue-rotate(149deg) brightness(97%) contrast(101%);
+    --filterblue: invert(59%) sepia(33%) saturate(6893%) hue-rotate(149deg) brightness(97%) contrast(101%);
 }
+.evmos-logo { filter: var(--filterblue);}
 
-.texts-t1 { font-size: 4rem; line-height: 1.1; font-weight: bold; }
+.texts-t1 { font-size: 3.2rem; line-height: 1.1; font-weight: bold; }
 .texts-t2 { font-size: 1.8rem; }
 .texts-t3 { font-size: 1.5rem; line-height: 1; }
 
@@ -29,6 +31,9 @@
 .texts-m { font-size: 1.25rem; line-height: 1.4; }
 .texts-sm { font-size: .85rem; line-height: 1.3; }
 .texts-xs {  }
+
+.buttons { background-color: var(--blue); text-decoration: none; color: var(--white); padding: 1rem 1.2rem; border-radius: 10px; transition: .25s; }
+.buttons:hover { background-color: var(--darkblue); color: var(--white); transition: .25s;}
 
 /**********Large (lg)**********/
 @media (max-width: 1199.98px) {}

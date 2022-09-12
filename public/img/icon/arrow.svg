@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="45" viewBox="0 0 40 45">
+  <defs>
+    <clipPath id="clip-arrow">
+      <rect width="40" height="45"/>
+    </clipPath>
+  </defs>
+  <g id="arrow" clip-path="url(#clip-arrow)">
+    <path id="Icon_ionic-ios-arrow-round-down" data-name="Icon ionic-ios-arrow-round-down" d="M50.009,37.409a2.689,2.689,0,0,0-3.787-.021L33.688,49.881V16.53a2.676,2.676,0,0,0-5.351,0V49.881L15.8,37.368a2.709,2.709,0,0,0-3.787.021,2.665,2.665,0,0,0,.021,3.766L29.119,58.114h0a3,3,0,0,0,.844.556,2.553,2.553,0,0,0,1.029.206,2.683,2.683,0,0,0,1.873-.761L49.947,41.155A2.622,2.622,0,0,0,50.009,37.409Z" transform="translate(-11.247 -13.875)"/>
+  </g>
+</svg>
