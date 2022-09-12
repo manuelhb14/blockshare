@@ -3,6 +3,9 @@ import { DataContext } from '../context/DataContext';
 import { ethers } from 'ethers';
 import { NavLink, Router, Routes, Route } from 'react-router-dom';
 
+import '../css/global.css';
+import '../css/navbar.css';
+
 export default function Navbar() {
 
   const { address, setAddress, isConnected, setIsConnected } = useContext(DataContext);
@@ -47,15 +50,15 @@ export default function Navbar() {
   }
 
   return (
-      <nav className="">
+      <nav className="nav">
         <NavLink to='/'>
-          <img src="/logo192.png" alt="logo" width={20} height={20} />
+          <img src="img/logo/evmos-logo.svg" alt="logo" className='evmos-logo nav-logo' />
         </NavLink>
-        <img src="/bell.svg" alt="bell" width={20} height={20} />
-        <NavLink to='/dashboard'>
+        <img src="/bell.svg" alt="bell" className='bell' />
+        <NavLink to='/dashboard' className='nav-a'>
           Dashboard
         </NavLink>
-        <button onClick="">Create Expense</button>
+        <button onClick="" className='nav-button nav-expense'>Create Expense</button>
         {isConnected ? (
           <button onClick="">{formatAddress(address)}</button>
         ) : (

@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from './pages/Home'
 import Dapp from './pages/Dapp';
-import Dashboard from './components/Dashboard';
 
 import './css/global.css'
 
@@ -23,12 +22,6 @@ function App() {
           <Route path='/dashboard' element={ <Dapp />} />
         </Routes>
     </Router>
-
-    // <div className="App">
-    //   <Navbar />
-    //   <Main />
-    //   <Dashboard />
-    // </div>
   );
 }
 
