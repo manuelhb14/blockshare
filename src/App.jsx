@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Dapp from './pages/Dapp';
 
 import './css/global.css'
+import './css/dashboard.css'
 
 function App() {
 
