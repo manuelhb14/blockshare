@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <clipPath id="clip-close">
+      <rect width="26" height="26"/>
+    </clipPath>
+  </defs>
+  <g id="close" clip-path="url(#clip-close)">
+    <path id="Icon_ionic-ios-close" data-name="Icon ionic-ios-close" d="M27.366,24.285,36.652,15a2.176,2.176,0,1,0-3.077-3.077l-9.286,9.286L15,11.922A2.176,2.176,0,1,0,11.925,15l9.286,9.286-9.286,9.286A2.176,2.176,0,1,0,15,36.649l9.286-9.286,9.286,9.286a2.176,2.176,0,1,0,3.077-3.077Z" transform="translate(-11.285 -11.289)"/>
+  </g>
+</svg>

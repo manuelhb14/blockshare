@@ -70,11 +70,13 @@ export default function Dashboard() {
               <div className="modal-content container">
                 <button onClick={closeModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
                 <div className="top row">
-                  <div className="col-8">
+                  <div className="col-6">
                     <p className="owner" data-address={selectedExpense.owner}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
+                    {/*<button>Pay split</button>*/}
                   </div>
+                  <div className="col-2"></div>
                   <div className="col-4">
                     <img src={selectedExpense.image} alt="expense" className="modal-img" />
                   </div>
@@ -136,8 +138,8 @@ export default function Dashboard() {
                           <div className="col">
                             <p>{debtor.payments.length > 0 ? convertDate(debtor.payments[debtor.payments.length - 1].date) : "N/A"}</p>
                           </div>
-                          <div className="col">
-                            <p>{debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
+                          <div className="col status">
+                            <p className={debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
                           </div>
                         </div>
                       ))}
