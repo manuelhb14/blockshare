@@ -1,5 +1,7 @@
-
 section.dashboard {  }
+section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: bold; margin: 2rem 0 1rem 1rem; text-align: left; line-height: 1; }
+section.dashboard .title .link { color: var(--blue); background-color: unset; border: 0; font-size: 1.2rem; margin-left: 4rem; outline: none; }
+section.dashboard .title .link img { filter: var(--filterblue); width: auto; height: 1.1rem; transform: rotate(-90deg); margin-left: 1rem; }
 section.dashboard .container {  }
 section.dashboard .container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: stretch; justify-content: flex-start; align-items: stretch; margin: 0 auto; width: 100%; }
 /*Cards*/
@@ -28,4 +30,30 @@ section.dashboard .container .content .container-card .cards .bottom .time-limit
 section.dashboard .container .content .container-card .cards .bottom .time-limit img { width: 1rem; height: 1rem; margin-right: .5rem; filter: var(--filterblue); vertical-align: top; }
 section.dashboard .container .content .container-card .cards .bottom .time-limit p { font-size: 1rem; line-height: 1.2; color: var(--blue); margin-bottom: 0; text-align: right;  }
 
-
+/*Modal pop-up*/
+.modal { width: 65%; height: 80%; border-radius: 1rem; background-color: var(--white); top: 50%; left: 50%; transform: translate(-50%, -50%); display: block; position: relative; }
+.modal .close { border: 0; background: none; outline: none; color: var(--blue); line-height: 1; display: inline-block; position: absolute; top: 1rem; right: 1rem; }
+.modal .close img { width: 1rem; height: 1rem; }
+.modal .modal-content { padding-top: 2rem; padding-bottom: 2rem; border: 0; }
+/*Modal pop-up top part*/
+.modal .modal-content .top {  }
+.modal .modal-content .top .owner { display: inline-block; background-color: var(--black); color: var(--white); border-radius: .6rem; line-height: 1; padding: .5rem .8rem; font-size: .9rem; cursor: pointer; margin-bottom: 0; }
+.modal .modal-content .top .owner img {  }
+.modal .modal-content .top .title {  }
+.modal .modal-content .top .description {  }
+.modal .modal-content .top .modal-img { width: 100%; height: 100%; }
+/*Modal pop-up middle part*/
+.modal .modal-content .middle {  }
+.modal .modal-content .middle .col {  }
+.modal .modal-content .middle .col p {  }
+.modal .modal-content .middle .col p:first-child { font-weight: bold; }
+/*Modal pop-up bottom part*/
+.modal .modal-content .bottom {  }
+.modal .modal-content .bottom .title {  }
+/*Modal pop-up table in bottom part*/
+.modal .modal-content .bottom .table { background-color: var(--lightblue-2); }
+.modal .modal-content .bottom .table .container {  }
+.modal .modal-content .bottom .table .container .row {  }
+.modal .modal-content .bottom .table .container .row .col {  }
+.modal .modal-content .bottom .table .container .row .col p {  }
+.modal .modal-content .bottom .table .container .row:first-child .col p { font-weight: bold; }
