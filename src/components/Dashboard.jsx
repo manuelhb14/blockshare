@@ -29,6 +29,14 @@ export default function Dashboard() {
     setModalIsOpen(false);
   }
 
+  const modalStyle = {
+    overlay: {
+      position: 'fixed',
+      inset: '0px',
+      backgroundColor: 'rgba(0,0,0,0.25)'
+    }
+  }
+
   const getRemainingAmount = () => {
     if (selectedExpense) {
       console.log(selectedExpense);
@@ -55,38 +63,90 @@ export default function Dashboard() {
   return (
     <section className="dashboard">
       <div className="container">
-        <h1>My expenses<button>View all expenses</button></h1>
+        <h1 className="title">My expenses<button className="link">View all expenses<img src="./img/icon/arrow.svg" alt="arrow-icon" /></button></h1>
         <div className="content row">
           {selectedExpense ? (
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-              <p>{selectedExpense.owner}</p>
-              <h2>{selectedExpense.name}</h2>
-              <p>{selectedExpense.description}</p>
-              <img src={selectedExpense.image} alt="expense" width={200} />
-              <p>Created</p>
-              <p>{convertDate(selectedExpense.date)}</p>
-              <p>Total</p>
-              <p>{selectedExpense.amount} {selectedExpense.token}</p>
-              <p>Remaining</p>
-              <p>{getRemainingAmount()} {selectedExpense.token}</p>
-              <p>Time remaining</p>
-              <p>{getDaysLeft(selectedExpense.timeLimit)} days</p>
-              <h2>Debtors</h2>
-              <p>Name</p>
-              <p>Share</p>
-              <p>Remaining</p>
-              <p>Time remaining</p>
-              <p>Status</p>
-              {selectedExpense.debtors.map(debtor => (
-                <div>
-                  <p>{debtor.address}</p>
-                  <p>{debtor.amount} {selectedExpense.token}</p>
-                  <p>{debtor.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
-                  <p>{debtor.payments.length > 0 ? convertDate(debtor.payments[debtor.payments.length - 1].date) : "N/A"}</p>
-                  <p>{debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal" style={modalStyle}>
+              <div className="modal-content container">
+                <button onClick={closeModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
+                <div className="top row">
+                  <div className="col-6">
+                    <p className="owner" data-address={selectedExpense.owner}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
+                    <h2 className="title">{selectedExpense.name}</h2>
+                    <p className="description">{selectedExpense.description}</p>
+                    {/*<button>Pay split</button>*/}
+                  </div>
+                  <div className="col-2"></div>
+                  <div className="col-4">
+                    <img src={selectedExpense.image} alt="expense" className="modal-img" />
+                  </div>
                 </div>
-              ))}
-              <button onClick={closeModal}>Close</button>
+                <div className="middle row">
+                  <div className="col">
+                    <p>Created</p>
+                    <p>{convertDate(selectedExpense.date)}</p>
+                  </div>
+                  <div className="col">
+                    <p>Total</p>
+                    <p>{selectedExpense.amount} {selectedExpense.token}</p>
+                  </div>
+                  <div className="col">
+                    <p>Remaining</p>
+                    <p>{getRemainingAmount()} {selectedExpense.token}</p>
+                  </div>
+                  <div className="col">
+                    <p>Time remaining</p>
+                    <p>{getDaysLeft(selectedExpense.timeLimit)} days</p>
+                  </div>
+                  <div className="col">
+                    <p>Status</p>
+                    <p>{selectedExpense.status}</p>
+                  </div>
+                </div>
+                <div className="bottom">
+                  <h2 className="title">Debtors</h2>
+                  <div className="table">
+                    <div className="container">
+                      <div className="row">
+                        <div className="col">
+                          <p>Name</p>
+                        </div>
+                        <div className="col">
+                          <p>Share</p>
+                        </div>
+                        <div className="col">
+                          <p>Remaining</p>
+                        </div>
+                        <div className="col">
+                          <p>Time remaining</p>
+                        </div>
+                        <div className="col">
+                          <p>Status</p>
+                        </div>
+                      </div>
+                      {selectedExpense.debtors.map(debtor => (
+                        <div className="row">
+                          <div className="col">
+                            <p>{reduceAddress(debtor.address)}</p>
+                          </div>
+                          <div className="col">
+                            <p>{debtor.amount} {selectedExpense.token}</p>
+                          </div>
+                          <div className="col">
+                            <p>{debtor.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
+                          </div>
+                          <div className="col">
+                            <p>{debtor.payments.length > 0 ? convertDate(debtor.payments[debtor.payments.length - 1].date) : "N/A"}</p>
+                          </div>
+                          <div className="col status">
+                            <p className={debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </Modal>
           ) : null}
           {expenses ? expenses.map((expense) => (
