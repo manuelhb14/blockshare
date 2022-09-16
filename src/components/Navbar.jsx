@@ -51,19 +51,27 @@ export default function Navbar() {
 
   return (
       <nav className="nav">
-        <NavLink to='/'>
-          <img src="img/logo/evmos-logo.svg" alt="logo" className='evmos-logo nav-logo' />
-        </NavLink>
-        <img src="/bell.svg" alt="bell" className='bell' />
-        <NavLink to='/dashboard' className='nav-a'>
-          Dashboard
-        </NavLink>
-        <button onClick="" className='nav-button nav-expense'>Create Expense</button>
-        {isConnected ? (
-          <button onClick="">{formatAddress(address)}</button>
-        ) : (
-          <button onClick={connect}>Connect</button>
-        )}
+        <div className="container">
+          <div className="row">
+            <div className="col-6">
+              <NavLink to='/' className="logo">
+                <img src="img/logo/evmos-logo.svg" alt="logo" />
+              </NavLink>
+            </div>
+            <div className="col-6">
+              <img src="/bell.svg" alt="bell" className='bell' />
+              <NavLink to='/dashboard' className='nav-a'>
+                Dashboard
+              </NavLink>
+              <button onClick="" className='nav-button nav-expense'>Create Expense</button>
+              {isConnected ? (
+                <button onClick="">{formatAddress(address)}</button>
+              ) : (
+                <button onClick={connect}>Connect</button>
+              )}
+            </div>
+          </div>
+        </div>
       </nav>
   );
 }
