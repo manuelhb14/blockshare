@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
 import { ethers } from 'ethers';
 import Modal from 'react-modal';
 
 export default function Dashboard() {
 
-  const { isConnected, setIsConnected, expenses, selectedExpense, setSelectedExpense } = useContext(DataContext);
+  const { address, isConnected, setIsConnected, expenses, setExpenses, selectedExpense, setSelectedExpense } = useContext(DataContext);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const convertDate = (timestamp) => {
@@ -42,8 +42,8 @@ export default function Dashboard() {
       console.log(selectedExpense);
       let total = selectedExpense.amount;
       selectedExpense.debtors.forEach(debtor => {
-        if (debtor.payments.length > 0) {
-          debtor.payments.forEach(payment => {
+        if (selectedExpense.payments.length > 0) {
+          selectedExpense.payments.forEach(payment => {
             total -= payment.amount;
           });
         }
@@ -59,7 +59,21 @@ export default function Dashboard() {
     var result = f5 + "..." + l4;
     return result;
   }
-  
+
+  const getExpenses = async () => {
+    const response = await fetch(`https://myshare.azurewebsites.net/api/retrieveexpenses?address=${address}`);
+    const data = await response.json();
+    await setExpenses(data.expenses);
+    console.log(data);
+  }
+
+  useEffect(() => {
+    if (isConnected && address) {
+      getExpenses();
+    }
+  }, [isConnected, address]);
+
+
   return (
     <section className="dashboard">
       <div className="container">
@@ -118,7 +132,7 @@ export default function Dashboard() {
                           <p>Remaining</p>
                         </div>
                         <div className="col">
-                          <p>Time remaining</p>
+                          <p>Paid on</p>
                         </div>
                         <div className="col">
                           <p>Status</p>
@@ -133,13 +147,20 @@ export default function Dashboard() {
                             <p>{debtor.amount} {selectedExpense.token}</p>
                           </div>
                           <div className="col">
-                            <p>{debtor.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
+                            <p>{debtor.amount - selectedExpense.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
                           </div>
                           <div className="col">
-                            <p>{debtor.payments.length > 0 ? convertDate(debtor.payments[debtor.payments.length - 1].date) : "N/A"}</p>
+                            <div className="date">
+                              {selectedExpense.payments.length > 0 ?
+                                <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
+                                  <p>{convertDate(selectedExpense.payments[debtor.payments.length - 1].date)}</p>
+                                </a>
+                                : <p>N/A</p>
+                                }
+                            </div>
                           </div>
                           <div className="col status">
-                            <p className={debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{debtor.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
+                            <p className={selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
                           </div>
                         </div>
                       ))}
