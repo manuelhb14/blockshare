@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 
 export default function Dashboard() {
 
-  const { address, isConnected, setIsConnected, expenses, setExpenses, selectedExpense, setSelectedExpense } = useContext(DataContext);
+  const { address, isConnected, setIsConnected, expenses, setExpenses, selectedExpense, setSelectedExpense, createExpense } = useContext(DataContext);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const convertDate = (timestamp) => {
@@ -71,7 +71,7 @@ export default function Dashboard() {
     if (isConnected && address) {
       getExpenses();
     }
-  }, [isConnected, address]);
+  }, [isConnected, address, createExpense]);
 
 
   return (
