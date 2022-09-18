@@ -1,3 +1,11 @@
+.nav {  }
+.nav .container {  }
+.nav .container .row {  }
+.nav .container .row .col-6 {  }
+.nav .logo {  }
+.nav .logo img { height: 2.5rem; width: auto; filter: var(--filterblue); }
+
+
 .nav .nav-logo { height: 2.5rem; width: auto; }
 .nav .bell { height: 2rem; width: auto;}
 .nav .nav-a { text-decoration: none; color: var(--black);}
