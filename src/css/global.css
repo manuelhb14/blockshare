@@ -1,7 +1,7 @@
 /* Font imports */
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Regular.ttf'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Bold.ttf'); font-weight: bold; font-style: normal; }
-@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Medium.ttf'); font-weight: medium; font-style: normal; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Regular.ttf'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Medium.ttf'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Biotif'; src: url('../../public/font/Biotif-Bold.ttf'); font-weight: 700; font-style: normal; }
 
 *, body {
     margin: 0;
@@ -24,7 +24,7 @@
 }
 .evmos-logo { filter: var(--filterblue);}
 
-.texts-t1 { font-size: 3.2rem; line-height: 1.1; font-weight: bold; }
+.texts-t1 { font-size: 3.2rem; line-height: 1.1; font-weight: 700; }
 .texts-t2 { font-size: 1.8rem; }
 .texts-t3 { font-size: 1.5rem; line-height: 1; }
 
@@ -70,7 +70,7 @@
 .modal .modal-content .bottom .table .container .row .col:last-child { padding-right: 0; }
 .modal .modal-content .bottom .table .container .row .col p { margin-bottom: 0; color: var(--black); font-weight: 400; line-height: 1.75; font-size: 1rem; }
 .modal .modal-content .bottom .table .container .row:first-child .col p { font-weight: bold; }
-.modal .modal-content .bottom .table .container .row .col.status p { display: inline-block; background-color: black; color: var(--white); padding: .3rem .75rem; font-size: .9rem; border-radius: .5rem; font-weight: medium; margin-bottom: 0; line-height: 1; text-align: center; }
+.modal .modal-content .bottom .table .container .row .col.status p { display: inline-block; background-color: black; color: var(--white); padding: .3rem .75rem; font-size: .9rem; border-radius: .5rem; font-weight: 500; margin-bottom: 0; line-height: 1; text-align: center; }
 .modal .modal-content .bottom .table .container .row .col.status p.Pending { background-color: var(--yellow); }
 .modal .modal-content .bottom .table .container .row .col.status p.Paid { background-color: var(--green); }
 

@@ -5,6 +5,10 @@
 .nav .logo {  }
 .nav .logo img { height: 2.5rem; width: auto; filter: var(--filterblue); }
 
+.nav .btn-type-1 { font-size: 1rem; color: var(--blue); background-color: var(--lightblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--blue); outline: none; padding: .5rem .75rem; }
+.nav .btn-type-2 { font-size: 1rem; color: var(--white); background-color: var(--darkblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--darkblue); outline: none; padding: .5rem .75rem; }
+
+
 
 .nav .nav-logo { height: 2.5rem; width: auto; }
 .nav .bell { height: 2rem; width: auto;}
