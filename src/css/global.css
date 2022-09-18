@@ -48,7 +48,7 @@
 .modal .modal-content .top .owner img { filter: invert(100%); height: .9rem; width: auto; margin-left: .75rem; }
 .modal .modal-content .top .title { color: var(--black); font-weight: bold; font-size: 1.4rem; line-height: 1; margin-bottom: 1rem; margin-top: .8rem; }
 .modal .modal-content .top .description { color: var(--black); font-weight: 400; font-size: 1rem; line-height: 1.3; margin-bottom: 0; }
-.modal .modal-content .top .modal-img { width: 100%; height: 100%; object-fit: cover; border-radius: .75rem; }
+.modal .modal-content .top .modal-img { width: 100%; height: 100%; object-fit: cover; border-radius: .75rem; max-height: 250px; }
 /*Modal pop-up middle part*/
 .modal .modal-content .middle { padding: 2rem 0 1.25rem 0; }
 .modal .modal-content .middle .col {  }

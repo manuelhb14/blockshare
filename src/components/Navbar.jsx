@@ -143,7 +143,7 @@ export default function Navbar() {
       )}
       {createExpense ? (
         <Modal isOpen={createExpense} onRequestClose={() => setCreateExpense(false)} className="modal" style={modalStyle}>
-          <div className="modal-content container">
+          <form action="javascript:void(0);" onSubmit={sendExpense} className="modal-content container needs-validation">
             <button onClick={() => setCreateExpense(false)} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
             <div className="top row">
               <h2 className="title">Create a shared expense</h2>
@@ -152,7 +152,7 @@ export default function Navbar() {
               <div className="form row">
                 <div className="form-col col-12">
                   <label for="formName">Name</label>
-                  <input id="formName" type="text" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} />
+                  <input id="formName" type="text" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} required />
                 </div>
               </div>
               {/*<div className="form row">
@@ -172,7 +172,7 @@ export default function Navbar() {
                 </div>
                 <div className="form-col col-6">
                   <label for="formTotal">Total</label>
-                  <input id="formTotal" type="number" value={expenseAmount} onChange={(e) => setExpenseAmount(e.target.value)} />
+                  <input id="formTotal" type="number" value={expenseAmount} onChange={(e) => setExpenseAmount(e.target.value)} required />
                 </div>
               </div>
               <div className="form row">
@@ -196,7 +196,7 @@ export default function Navbar() {
               <div className="form row">
                 <div className="form-col col-12">
                   <label for="formDate">Active until</label>
-                  <input id="formDate" type="date" value={expenseDate} onChange={(e) => setExpenseDate(e.target.value)} />
+                  <input id="formDate" type="date" value={expenseDate} onChange={(e) => setExpenseDate(e.target.value)} required />
                 </div>
               </div>
             </div>
@@ -216,10 +216,10 @@ export default function Navbar() {
                 return (
                   <div className="form row">
                     <div className="form-col col-6">
-                      <input name="address" placeholder="0x1234...5678" value={x.address} onChange={e => handleInputChange(e, i)} />
+                      <input name="address" placeholder="0x1234...5678" value={x.address} onChange={e => handleInputChange(e, i)} required />
                     </div>
                     <div className="form-col col-5">
-                      <input className="" name="amount" placeholder="$" value={x.amount} onChange={e => handleInputChange(e, i)} />
+                      <input className="" name="amount" placeholder="$" value={x.amount} onChange={e => handleInputChange(e, i)} required />
                     </div>
                     <div className="form-col col-1">
                       {expenseDebtors.length !== 1 && <button className="remove-btn mr10" onClick={() => handleRemoveClick(i)}><img src="./img/icon/close.svg" alt="remove debtor button icon" /></button>}
@@ -233,10 +233,10 @@ export default function Navbar() {
             </div>
             <div className="bottom row">
               <div className="bottom-content">
-                <button className="create-btn" onClick={sendExpense}>Create expense</button>
+                <button className="create-btn" type="submit">Create expense</button>
               </div>
             </div>
-          </div>
+          </form>
         </Modal>
       ) : null}
     </nav>

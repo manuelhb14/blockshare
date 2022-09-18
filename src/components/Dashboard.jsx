@@ -85,7 +85,7 @@ export default function Dashboard() {
                 <button onClick={closeModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
                 <div className="top row">
                   <div className="col-6">
-                    <p className="owner" data-address={selectedExpense.owner}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
+                    <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
                     {/*<button>Pay split</button>*/}
