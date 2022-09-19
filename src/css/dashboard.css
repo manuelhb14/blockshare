@@ -1,5 +1,5 @@
 section.dashboard {  }
-section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: bold; margin: 2rem 0 1rem 1rem; text-align: left; line-height: 1; }
+section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: 700; margin: 2rem 0 1rem 1rem; text-align: left; line-height: 1; }
 section.dashboard .title .link { color: var(--blue); background-color: unset; border: 0; font-size: 1.2rem; margin-left: 4rem; outline: none; }
 section.dashboard .title .link img { filter: var(--filterblue); width: auto; height: 1.1rem; transform: rotate(-90deg); margin-left: 1rem; }
 section.dashboard .container {  }
@@ -18,7 +18,7 @@ section.dashboard .container .content .container-card .cards .bottom .row {  }
 section.dashboard .container .content .container-card .cards .bottom .name { display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; justify-content: center; align-items: center; }
 section.dashboard .container .content .container-card .cards .bottom .name h2 { color: var(--black); font-weight: 600; margin-bottom: 0; line-height: 1.1; font-size: 1.2rem; }
 section.dashboard .container .content .container-card .cards .bottom .status { display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-end; justify-content: center; align-items: center; }
-section.dashboard .container .content .container-card .cards .bottom .status p { display: inline-block; background-color: black; color: var(--white); padding: .3rem .75rem; font-size: .9rem; border-radius: .5rem; font-weight: medium; margin-bottom: 0; line-height: 1; text-align: center; }
+section.dashboard .container .content .container-card .cards .bottom .status p { display: inline-block; background-color: black; color: var(--white); padding: .3rem .75rem; font-size: .9rem; border-radius: .5rem; font-weight: 500; margin-bottom: 0; line-height: 1; text-align: center; }
 section.dashboard .container .content .container-card .cards .bottom .status p.Pending { background-color: var(--yellow); }
 section.dashboard .container .content .container-card .cards .bottom .status p.Paid { background-color: var(--green); }
 section.dashboard .container .content .container-card .cards .bottom .description {  }

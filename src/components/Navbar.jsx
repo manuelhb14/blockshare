@@ -124,121 +124,139 @@ export default function Navbar() {
     }
   }
 
+  const navToggle = () => {
+    var body = document.getElementsByTagName("body")[0];
+    if (body.classList.contains("nav-open")) {
+      body.classList.remove("nav-open");
+    } else {
+      body.classList.add("nav-open");
+    }
+  }
+
   return (
     <nav className="nav">
-      <NavLink to='/'>
-        <img src="img/logo/evmos-logo.svg" alt="logo" className='evmos-logo nav-logo' />
-      </NavLink>
-      <img src="/bell.svg" alt="bell" className='bell' />
-      <NavLink to='/dashboard' className='nav-a'>
-        Dashboard
-      </NavLink>
-      {isConnected ? (
-        <button onClick={() => setCreateExpense(true)}>Create expense</button>
-      ) : null}
-      {isConnected ? (
-        <button onClick="">{formatAddress(address)}</button>
-      ) : (
-        <button onClick={connect}>Connect</button>
-      )}
-      {createExpense ? (
-        <Modal isOpen={createExpense} onRequestClose={() => setCreateExpense(false)} className="modal" style={modalStyle}>
-          <form action="javascript:void(0);" onSubmit={sendExpense} className="modal-content container needs-validation">
-            <button onClick={() => setCreateExpense(false)} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
-            <div className="top row">
-              <h2 className="title">Create a shared expense</h2>
-            </div>
-            <div className="form-container">
-              <div className="form row">
-                <div className="form-col col-12">
-                  <label for="formName">Name</label>
-                  <input id="formName" type="text" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} required />
-                </div>
+      <div className="container">
+      <div className="content">
+        <div className="nav-item left">
+          <NavLink to='/' className="logo">
+            <img src="img/logo/evmos-logo.svg" alt="logo" />
+          </NavLink>
+        </div>
+        <div className="nav-item nav-toggle">
+          <a href="javascript:;" id="nav-toggler" onClick={navToggle}>
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3"></div>
+          </a>
+        </div>
+        <div className="nav-item right">
+          <img src="/bell.svg" alt="bell" className='bell' />
+          <NavLink to='/dashboard' className='nav-a'>
+            Dashboard
+          </NavLink>
+          {isConnected ? (
+              <button className="btn-type-1" onClick={() => setCreateExpense(true)}>Create expense</button>
+          ) : null}
+          {isConnected ? (
+              <button className="btn-type-2" onClick="">{formatAddress(address)}</button>
+          ) : (
+              <button className="btn-type-2" onClick={connect}>Connect</button>
+          )}
+        </div>
+      </div>
+        {createExpense ? (
+          <Modal isOpen={createExpense} onRequestClose={() => setCreateExpense(false)} className="modal" style={modalStyle}>
+            <form action="javascript:void(0);" onSubmit={sendExpense} className="modal-content container needs-validation">
+              <button onClick={() => setCreateExpense(false)} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
+              <div className="top row">
+                <h2 className="title">Create a shared expense</h2>
               </div>
-              {/*<div className="form row">
-                <div className="form-col col-12">
-                  <label for="formDescription">Description</label>
-                  <input id="formDescription" type="text" value={expenseDescription} onChange={(e) => setExpenseDescription(e.target.value)} />
-                </div>
-              </div>*/}
-              <div className="form row">
-                <div className="form-col col-6">
-                  <label for="token">Token</label>
-                  <select name="token" id="token" value={expenseToken} onChange={(e) => setExpenseToken(e.target.value)}>
-                    <option value="EVMOS">EVMOS</option>
-                    <option value="ATOM">ATOM</option>
-                    <option value="USDC">USDC</option>
-                  </select>
-                </div>
-                <div className="form-col col-6">
-                  <label for="formTotal">Total</label>
-                  <input id="formTotal" type="number" value={expenseAmount} onChange={(e) => setExpenseAmount(e.target.value)} required />
-                </div>
-              </div>
-              <div className="form row">
-                <div className="form-col col-12">
-                  <label for="category">Category</label>
-                  <select name="category" id="category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
-                    <option value="">Select a category</option>
-                    <option value="/food.jpeg">Food</option>
-                    <option value="/transport.jpeg">Transport</option>
-                    <option value="/entertainment.jpeg">Entertainment</option>
-                    <option value="/other.jpeg">Other</option>
-                  </select>
-                </div>
-              </div>
-              <div className="form row">
-                <div className="form-col col-12">
-                  <label for="formDescription">Description</label>
-                  <textarea id="formDescription" type="text" value={expenseDescription} onChange={(e) => setExpenseDescription(e.target.value)} rows="3" placeholder="The description comes here..." />
-                </div>
-              </div>
-              <div className="form row">
-                <div className="form-col col-12">
-                  <label for="formDate">Active until</label>
-                  <input id="formDate" type="date" value={expenseDate} onChange={(e) => setExpenseDate(e.target.value)} required />
-                </div>
-              </div>
-            </div>
-            <div className="top row">
-              <h2 className="title">Debtors</h2>
-            </div>
-            <div className="form-container">
-              <div className="form row">
-                <div className="form-col col-6">
-                  <label>Debtor</label>
-                </div>
-                <div className="form-col col-6">
-                  <label>Amount</label>
-                </div>
-              </div>
-              {expenseDebtors.map((x, i) => {
-                return (
-                  <div className="form row">
-                    <div className="form-col col-6">
-                      <input name="address" placeholder="0x1234...5678" value={x.address} onChange={e => handleInputChange(e, i)} required />
-                    </div>
-                    <div className="form-col col-5">
-                      <input className="" name="amount" placeholder="$" value={x.amount} onChange={e => handleInputChange(e, i)} required />
-                    </div>
-                    <div className="form-col col-1">
-                      {expenseDebtors.length !== 1 && <button className="remove-btn mr10" onClick={() => handleRemoveClick(i)}><img src="./img/icon/close.svg" alt="remove debtor button icon" /></button>}
-                    </div>
-                    <div className="form-col col-12">
-                      {expenseDebtors.length - 1 === i && <button className="add-btn" onClick={handleAddClick}>Add new debtor</button>}
-                    </div>
+              <div className="form-container">
+                <div className="form row">
+                  <div className="form-col col-12">
+                    <label for="formName">Name</label>
+                    <input id="formName" type="text" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} required />
                   </div>
-                );
-              })}
-            </div>
-            <div className="bottom row">
-              <div className="bottom-content">
-                <button className="create-btn" type="submit">Create expense</button>
+                </div>
+                <div className="form row">
+                  <div className="form-col col-6">
+                    <label for="token">Token</label>
+                    <select name="token" id="token" value={expenseToken} onChange={(e) => setExpenseToken(e.target.value)}>
+                      <option value="EVMOS">EVMOS</option>
+                      <option value="ATOM">ATOM</option>
+                      <option value="USDC">USDC</option>
+                    </select>
+                  </div>
+                  <div className="form-col col-6">
+                    <label for="formTotal">Total</label>
+                    <input id="formTotal" type="number" value={expenseAmount} onChange={(e) => setExpenseAmount(e.target.value)} required />
+                  </div>
+                </div>
+                <div className="form row">
+                  <div className="form-col col-12">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
+                      <option value="">Select a category</option>
+                      <option value="/food.jpeg">Food</option>
+                      <option value="/transport.jpeg">Transport</option>
+                      <option value="/entertainment.jpeg">Entertainment</option>
+                      <option value="/other.jpeg">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="form row">
+                  <div className="form-col col-12">
+                    <label for="formDescription">Description</label>
+                    <textarea id="formDescription" type="text" value={expenseDescription} onChange={(e) => setExpenseDescription(e.target.value)} rows="3" placeholder="The description comes here..." />
+                  </div>
+                </div>
+                <div className="form row">
+                  <div className="form-col col-12">
+                    <label for="formDate">Active until</label>
+                    <input id="formDate" type="date" value={expenseDate} onChange={(e) => setExpenseDate(e.target.value)} required />
+                  </div>
+                </div>
               </div>
-            </div>
-          </form>
-        </Modal>
-      ) : null}
+              <div className="top row">
+                <h2 className="title">Debtors</h2>
+              </div>
+              <div className="form-container">
+                <div className="form row">
+                  <div className="form-col col-6">
+                    <label>Debtor</label>
+                  </div>
+                  <div className="form-col col-6">
+                    <label>Amount</label>
+                  </div>
+                </div>
+                {expenseDebtors.map((x, i) => {
+                  return (
+                    <div className="form row">
+                      <div className="form-col col-6">
+                        <input name="address" placeholder="0x1234...5678" value={x.address} onChange={e => handleInputChange(e, i)} required />
+                      </div>
+                      <div className="form-col col-5">
+                        <input className="" name="amount" placeholder="$" value={x.amount} onChange={e => handleInputChange(e, i)} required />
+                      </div>
+                      <div className="form-col col-1">
+                        {expenseDebtors.length !== 1 && <button className="remove-btn mr10" onClick={() => handleRemoveClick(i)}><img src="./img/icon/close.svg" alt="remove debtor button icon" /></button>}
+                      </div>
+                      <div className="form-col col-12">
+                        {expenseDebtors.length - 1 === i && <button className="add-btn" onClick={handleAddClick}>Add new debtor</button>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="bottom row">
+                <div className="bottom-content">
+                  <button className="create-btn" type="submit">Create expense</button>
+                </div>
+              </div>
+            </form>
+          </Modal>
+        ) : null}
+      </div>
     </nav>
   );
 }

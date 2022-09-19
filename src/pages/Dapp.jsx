@@ -5,8 +5,8 @@ import Dashboard from '../components/Dashboard'
 
 export default function Dapp() {
   return (
-    <div>
+    <main>
       <Dashboard />
-    </div>
+    </main>
   )
 }
