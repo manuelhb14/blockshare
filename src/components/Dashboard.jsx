@@ -7,6 +7,9 @@ export default function Dashboard() {
 
   const { address, isConnected, setIsConnected, expenses, setExpenses, selectedExpense, setSelectedExpense, createExpense } = useContext(DataContext);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [paymentModalIsOpen, setPaymentModalIsOpen] = React.useState(false);
+  const [paymentAmount, setPaymentAmount] = React.useState(null);
+  const [paymentToken, setPaymentToken] = React.useState(null);
 
   const convertDate = (timestamp) => {
     let date = new Date(timestamp * 1000);
@@ -28,7 +31,7 @@ export default function Dashboard() {
   const closeModal = () => {
     setModalIsOpen(false);
   }
-
+  
   const modalStyle = {
     overlay: {
       position: 'fixed',
@@ -67,6 +70,12 @@ export default function Dashboard() {
     console.log(data);
   }
 
+  const paySplit = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    console.log(signer);
+  }
+
   useEffect(() => {
     if (isConnected && address) {
       getExpenses();
@@ -88,7 +97,7 @@ export default function Dashboard() {
                     <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
-                    {/*<button>Pay split</button>*/}
+                    <button onClick={() => setPaymentModalIsOpen(true)} className="">Pay split</button>
                   </div>
                   <div className="col-2"></div>
                   <div className="col-4">
@@ -153,7 +162,7 @@ export default function Dashboard() {
                             <div className="date">
                               {selectedExpense.payments.length > 0 ?
                                 <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
-                                  <p>{convertDate(selectedExpense.payments[debtor.payments.length - 1].date)}</p>
+                                  <p>{convertDate(selectedExpense.payments[selectedExpense.payments.length - 1].date)}</p>
                                 </a>
                                 : <p>N/A</p>
                                 }
@@ -201,6 +210,36 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
+              <Modal isOpen={paymentModalIsOpen} onRequestClose={() => setPaymentModalIsOpen(false)}>
+                <div className="modal">
+                  <div className="top row">
+                    <div className="col-6">
+                      <p className="">Pay split</p>
+                    </div>
+                    <div className="col-6">
+                      <button onClick={() => setPaymentModalIsOpen(false)} className="close">X</button>
+                    </div>
+                  </div>
+                  <div className="middle">
+                    <div className="row">
+                      <div className="col-6">
+                        <p>Amount</p>
+                        <input type="number" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} />
+                      </div>
+                      <div className="col-6">
+                        <p>Token</p>
+                        <select value={paymentToken} onChange={(e) => setPaymentToken(e.target.value)}>
+                          <option value="EVM">EVM</option>
+                          <option value="EVMOS">EVMOS</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bottom">
+                    <button onClick={() => paySplit()}>Pay</button>
+                  </div>
+                </div>
+              </Modal>
             </div>
           )) : (
             <p>No expenses</p>
