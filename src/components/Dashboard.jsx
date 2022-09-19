@@ -33,7 +33,8 @@ export default function Dashboard() {
     overlay: {
       position: 'fixed',
       inset: '0px',
-      backgroundColor: 'rgba(0,0,0,0.25)'
+      backgroundColor: 'rgba(0,0,0,0.25)',
+      zIndex: '4'
     }
   }
 
@@ -84,35 +85,35 @@ export default function Dashboard() {
               <div className="modal-content container">
                 <button onClick={closeModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
                 <div className="top row">
-                  <div className="col-6">
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
                     {/*<button>Pay split</button>*/}
                   </div>
                   <div className="col-2"></div>
-                  <div className="col-4">
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <img src={selectedExpense.image} alt="expense" className="modal-img" />
                   </div>
                 </div>
                 <div className="middle row">
-                  <div className="col">
+                  <div className="column col-4 col-sm-4">
                     <p>Created</p>
                     <p>{convertDate(selectedExpense.date)}</p>
                   </div>
-                  <div className="col">
+                  <div className="column col-4 col-sm-4">
                     <p>Total</p>
                     <p>{selectedExpense.amount} {selectedExpense.token}</p>
                   </div>
-                  <div className="col">
+                  <div className="column col-4 col-sm-4">
                     <p>Remaining</p>
                     <p>{getRemainingAmount()} {selectedExpense.token}</p>
                   </div>
-                  <div className="col">
+                  <div className="column col-4 col-sm-4">
                     <p>Time remaining</p>
                     <p>{getDaysLeft(selectedExpense.timeLimit)} days</p>
                   </div>
-                  <div className="col">
+                  <div className="column col-4 col-sm-4">
                     <p>Status</p>
                     <p>{selectedExpense.status}</p>
                   </div>
@@ -122,44 +123,42 @@ export default function Dashboard() {
                   <div className="table">
                     <div className="container">
                       <div className="row">
-                        <div className="col">
+                        <div className="column">
                           <p>Name</p>
                         </div>
-                        <div className="col">
+                        <div className="column">
                           <p>Share</p>
                         </div>
-                        <div className="col">
+                        <div className="column">
                           <p>Remaining</p>
                         </div>
-                        <div className="col">
+                        <div className="column">
                           <p>Paid on</p>
                         </div>
-                        <div className="col">
+                        <div className="column">
                           <p>Status</p>
                         </div>
                       </div>
                       {selectedExpense.debtors.map(debtor => (
                         <div className="row">
-                          <div className="col">
+                          <div className="column">
                             <p>{reduceAddress(debtor.address)}</p>
                           </div>
-                          <div className="col">
+                          <div className="column">
                             <p>{debtor.amount} {selectedExpense.token}</p>
                           </div>
-                          <div className="col">
+                          <div className="column">
                             <p>{debtor.amount - selectedExpense.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
                           </div>
-                          <div className="col">
-                            <div className="date">
-                              {selectedExpense.payments.length > 0 ?
-                                <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
-                                  <p>{convertDate(selectedExpense.payments[debtor.payments.length - 1].date)}</p>
-                                </a>
-                                : <p>N/A</p>
-                                }
-                            </div>
+                          <div className="column">
+                            {selectedExpense.payments.length > 0 ?
+                              <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
+                                <p>{convertDate(selectedExpense.payments[debtor.payments.length - 1].date)}</p>
+                              </a>
+                              : <p>N/A</p>
+                              }
                           </div>
-                          <div className="col status">
+                          <div className="column status">
                             <p className={selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
                           </div>
                         </div>
@@ -171,7 +170,7 @@ export default function Dashboard() {
             </Modal>
           ) : null}
           {expenses ? expenses.map((expense) => (
-            <div className="container-card col-12 col-md-4 col-lg-3">
+            <div className="container-card col-12 col-sm-6 col-md-4 col-lg-3">
               <div className="cards" key={expense.id} onClick={() => openModal(expense)}>
                 <div className="top">
                   <p className="owner">{reduceAddress(expense.owner)}</p>

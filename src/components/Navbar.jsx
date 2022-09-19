@@ -120,7 +120,8 @@ export default function Navbar() {
     overlay: {
       position: 'fixed',
       inset: '0px',
-      backgroundColor: 'rgba(0,0,0,0.25)'
+      backgroundColor: 'rgba(0,0,0,0.25)',
+      zIndex: '4'
     }
   }
 
@@ -133,12 +134,22 @@ export default function Navbar() {
     }
   }
 
+  const closeNav = () => {
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.remove("nav-open");
+  }
+
+  const createEnav = () => {
+    setCreateExpense(true);
+    closeNav();
+  }
+
   return (
     <nav className="nav">
       <div className="container">
       <div className="content">
         <div className="nav-item left">
-          <NavLink to='/' className="logo">
+          <NavLink to='/' className="logo" onClick={closeNav}>
             <img src="img/logo/evmos-logo.svg" alt="logo" />
           </NavLink>
         </div>
@@ -151,11 +162,11 @@ export default function Navbar() {
         </div>
         <div className="nav-item right">
           <img src="/bell.svg" alt="bell" className='bell' />
-          <NavLink to='/dashboard' className='nav-a'>
+          <NavLink to='/dashboard' className='nav-a' onClick={closeNav}>
             Dashboard
           </NavLink>
           {isConnected ? (
-              <button className="btn-type-1" onClick={() => setCreateExpense(true)}>Create expense</button>
+              <button className="btn-type-1" onClick={createEnav}>Create expense</button>
           ) : null}
           {isConnected ? (
               <button className="btn-type-2" onClick="">{formatAddress(address)}</button>
