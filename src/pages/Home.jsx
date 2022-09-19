@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Home() {
   return (
-    <div className='container main'>
+    <main className='container main'>
         <div className="row">
             <div className="left d-none d-sm-none  d-md-block col-md-6">
                 <img src='img/bg-img.png' className='bg-img'></img>
@@ -31,6 +31,6 @@ export default function Home() {
                 </div>
             </div>
         </div>    
-    </div>
+    </main>
   )
 }

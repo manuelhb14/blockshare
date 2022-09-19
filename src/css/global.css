@@ -11,6 +11,8 @@
     overflow-x: hidden;
 }
 
+body.nav-open { overflow-y: hidden; }
+
 :root {
     --white: #ffffff;
     --blue: #00B2C1;

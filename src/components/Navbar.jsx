@@ -124,24 +124,46 @@ export default function Navbar() {
     }
   }
 
+  const navToggle = () => {
+    var body = document.getElementsByTagName("body")[0];
+    if (body.classList.contains("nav-open")) {
+      body.classList.remove("nav-open");
+    } else {
+      body.classList.add("nav-open");
+    }
+  }
+
   return (
     <nav className="nav">
       <div className="container">
-        <NavLink to='/'>
-          <img src="img/logo/evmos-logo.svg" alt="logo" className='evmos-logo nav-logo' />
-        </NavLink>
-        <img src="/bell.svg" alt="bell" className='bell' />
-        <NavLink to='/dashboard' className='nav-a'>
-          Dashboard
-        </NavLink>
-        {isConnected ? (
-          <button className="btn-type-1" onClick={() => setCreateExpense(true)}>Create expense</button>
-        ) : null}
-        {isConnected ? (
-          <button className="btn-type-2" onClick="">{formatAddress(address)}</button>
-        ) : (
-          <button className="btn-type-2" onClick={connect}>Connect</button>
-        )}
+      <div className="content">
+        <div className="nav-item left">
+          <NavLink to='/' className="logo">
+            <img src="img/logo/evmos-logo.svg" alt="logo" />
+          </NavLink>
+        </div>
+        <div className="nav-item nav-toggle">
+          <a href="javascript:;" id="nav-toggler" onClick={navToggle}>
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3"></div>
+          </a>
+        </div>
+        <div className="nav-item right">
+          <img src="/bell.svg" alt="bell" className='bell' />
+          <NavLink to='/dashboard' className='nav-a'>
+            Dashboard
+          </NavLink>
+          {isConnected ? (
+              <button className="btn-type-1" onClick={() => setCreateExpense(true)}>Create expense</button>
+          ) : null}
+          {isConnected ? (
+              <button className="btn-type-2" onClick="">{formatAddress(address)}</button>
+          ) : (
+              <button className="btn-type-2" onClick={connect}>Connect</button>
+          )}
+        </div>
+      </div>
         {createExpense ? (
           <Modal isOpen={createExpense} onRequestClose={() => setCreateExpense(false)} className="modal" style={modalStyle}>
             <form action="javascript:void(0);" onSubmit={sendExpense} className="modal-content container needs-validation">
