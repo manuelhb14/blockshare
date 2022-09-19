@@ -178,10 +178,10 @@ export default function Dashboard() {
                 </div>
                 <div className="bottom container">
                   <div className="row">
-                    <div className="name col-8">
+                    <div className="name">
                       <h2>{expense.name}</h2>
                     </div>
-                    <div className="status col-4">
+                    <div className="status">
                       <p className={expense.status}>{expense.status}</p>
                     </div>
                   </div>
