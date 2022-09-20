@@ -278,7 +278,7 @@ export default function Navbar() {
               </div>
               <div className="bottom row">
                 <div className="bottom-content">
-                  <button className="create-btn" type="submit">Create expense</button>
+                  <button className="submit-btn" type="submit">Create expense</button>
                 </div>
               </div>
             </form>
