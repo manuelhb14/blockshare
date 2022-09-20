@@ -6,6 +6,7 @@ import { NavLink, Router, Routes, Route } from 'react-router-dom';
 
 import '../css/global.css';
 import '../css/navbar.css';
+import { useEffect } from 'react';
 
 export default function Navbar() {
 
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [expenseToken, setExpenseToken] = useState(null);
   const [expenseCategory, setExpenseCategory] = useState("");
   const [expenseDate, setExpenseDate] = useState(null);
+  const [timestamp, setTimestamp] = useState(null);
   const [expenseDebtors, setExpenseDebtors] = useState([{ address: "", amount: null }]);
 
 
@@ -26,6 +28,12 @@ export default function Navbar() {
     list[index][name] = value;
     setExpenseDebtors(list);
   };
+
+  useEffect(() => {
+    if (expenseDate) {
+      setTimestamp((Date.parse(expenseDate) / 1000).toString());
+    }
+  }, [expenseDate]);
 
   const handleRemoveClick = index => {
     const list = [...expenseDebtors];
@@ -81,11 +89,11 @@ export default function Navbar() {
       name: expenseName,
       amount: parseInt(expenseAmount),
       token: expenseToken,
-      date: (Date.now() / 1000).toFixed(0).toString(),
+      date: parseInt((Date.now() / 1000).toFixed(0)),
       description: expenseDescription,
       image: expenseCategory,
       owner: address,
-      timeLimit: (Date.parse(expenseDate) / 1000).toString(),
+      timeLimit: parseInt(timestamp),
       status: "Pending",
       debtors: expenseDebtors.map(debtor => {
         return {
@@ -114,6 +122,14 @@ export default function Navbar() {
       }
       );
     setCreateExpense(false);
+    setExpenseName("");
+    setExpenseDescription("");
+    setExpenseAmount(null);
+    setExpenseToken(null);
+    setExpenseCategory("");
+    setExpenseDate(null);
+    setTimestamp(null);
+    setExpenseDebtors([{ address: "", amount: null }]);
   }
 
   const modalStyle = {
@@ -193,9 +209,10 @@ export default function Navbar() {
                   <div className="form-col col-6">
                     <label for="token">Token</label>
                     <select name="token" id="token" value={expenseToken} onChange={(e) => setExpenseToken(e.target.value)}>
+                      <option value="">Select a token</option>
                       <option value="EVMOS">EVMOS</option>
-                      <option value="ATOM">ATOM</option>
                       <option value="USDC">USDC</option>
+                      <option value="EvmoSwap">EvmoSwap</option>
                     </select>
                   </div>
                   <div className="form-col col-6">
@@ -244,7 +261,7 @@ export default function Navbar() {
                   return (
                     <div className="form row">
                       <div className="form-col col-6">
-                        <input name="address" placeholder="0x1234...5678" value={x.address} onChange={e => handleInputChange(e, i)} required />
+                        <input name="address" value={x.address} onChange={e => handleInputChange(e, i)} required />
                       </div>
                       <div className="form-col col-5">
                         <input className="" name="amount" placeholder="$" value={x.amount} onChange={e => handleInputChange(e, i)} required />

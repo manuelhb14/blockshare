@@ -8,18 +8,279 @@ export default function Dashboard() {
   const { address, isConnected, setIsConnected, expenses, setExpenses, selectedExpense, setSelectedExpense, createExpense } = useContext(DataContext);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [paymentModalIsOpen, setPaymentModalIsOpen] = React.useState(false);
-  const [paymentAmount, setPaymentAmount] = React.useState(null);
-  const [paymentToken, setPaymentToken] = React.useState(null);
+  const [amount, setAmount] = React.useState("");
 
+  const tokenMap = {
+    "EvmoSwap": "0x7cBa32163a8f4c56C846f5C3685E3b7a450c9002",
+    "USDC": "0xae95d4890bf4471501E0066b6c6244E1CAaEe791",
+  }
+
+  const abi = [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    }
+  ]
+
+  const sendPaymentWithToken = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractAddress = tokenMap[selectedExpense.token];
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const decimals = await contract.decimals();
+    const tx = await contract.transfer(selectedExpense.owner, ethers.utils.parseUnits(amount, decimals));
+    await tx.wait();
+    console.log("tx sent");
+  }
+
+  const sendPaymentWithEther = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const tx = await signer.sendTransaction({
+      to: selectedExpense.owner,
+      value: ethers.utils.parseEther(amount)
+    });
+    await tx.wait();
+    console.log("tx sent");
+  }
+
+  const sendPayment = async () => {
+    if (selectedExpense.token === "EVMOS") {
+      await sendPaymentWithEther();
+    } else {
+      await sendPaymentWithToken();
+    }
+  }
+  
   const convertDate = (timestamp) => {
     let date = new Date(timestamp * 1000);
     return date.toLocaleDateString();
   }
 
   const getDaysLeft = (timestamp) => {
-    let date = new Date(timestamp * 1000);
+    // console.log(timestamp);
+    let date = new Date(timestamp);
     let now = new Date();
+    // console.log(date);
+    // console.log(now);
     let diff = date.getTime() - now.getTime();
+    console.log(diff);
     return Math.ceil(diff / (1000 * 3600 * 24));
   }
 
@@ -31,7 +292,18 @@ export default function Dashboard() {
   const closeModal = () => {
     setModalIsOpen(false);
   }
-  
+
+  const openPaymentModal = (expense) => {
+    setModalIsOpen(false);
+    setPaymentModalIsOpen(true);
+  }
+
+  const closePaymentModal = () => {
+    setPaymentModalIsOpen(false);
+    setModalIsOpen(true);
+    setAmount("");
+  }
+
   const modalStyle = {
     overlay: {
       position: 'fixed',
@@ -45,12 +317,8 @@ export default function Dashboard() {
     if (selectedExpense) {
       console.log(selectedExpense);
       let total = selectedExpense.amount;
-      selectedExpense.debtors.forEach(debtor => {
-        if (selectedExpense.payments.length > 0) {
-          selectedExpense.payments.forEach(payment => {
-            total -= payment.amount;
-          });
-        }
+      selectedExpense.payments.forEach(payment => {
+        total -= payment.amount;
       });
       return total;
     }
@@ -98,7 +366,7 @@ export default function Dashboard() {
                     <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
-                    <button onClick={() => setPaymentModalIsOpen(true)} className="">Pay split</button>
+                    <button onClick={openPaymentModal} className="">Pay split</button>
                   </div>
                   <div className="col-2"></div>
                   <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
@@ -163,10 +431,10 @@ export default function Dashboard() {
                             <div className="date">
                               {selectedExpense.payments.length > 0 ?
                                 <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
-                                  <p>{convertDate(selectedExpense.payments[debtor.payments.length - 1].date)}</p>
+                                  <p>{convertDate(selectedExpense.payments[selectedExpense.payments.length - 1].date)}</p>
                                 </a>
                                 : <p>N/A</p>
-                                }
+                              }
                             </div>
                           </div>
                           <div className="col status">
@@ -211,36 +479,32 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              <Modal isOpen={paymentModalIsOpen} onRequestClose={() => setPaymentModalIsOpen(false)}>
-                <div className="modal">
-                  <div className="top row">
-                    <div className="col-6">
-                      <p className="">Pay split</p>
-                    </div>
-                    <div className="col-6">
-                      <button onClick={() => setPaymentModalIsOpen(false)} className="close">X</button>
-                    </div>
-                  </div>
-                  <div className="middle">
-                    <div className="row">
+              {selectedExpense ?
+                <Modal isOpen={paymentModalIsOpen} onRequestClose={closePaymentModal} >
+                  <div className="modal">
+                    <div className="top row">
                       <div className="col-6">
-                        <p>Amount</p>
-                        <input type="number" value={paymentAmount} onChange={(e) => setPaymentAmount(e.target.value)} />
+                        <h2 className="title">{selectedExpense.name} to {reduceAddress(selectedExpense.owner)}</h2>
+                        <p className="">Pay: {selectedExpense.amount} {selectedExpense.token}</p>
                       </div>
                       <div className="col-6">
-                        <p>Token</p>
-                        <select value={paymentToken} onChange={(e) => setPaymentToken(e.target.value)}>
-                          <option value="EVM">EVM</option>
-                          <option value="EVMOS">EVMOS</option>
-                        </select>
+                        <button onClick={closePaymentModal} className="close">X</button>
                       </div>
                     </div>
+                    <div className="middle">
+                      <div className="row">
+                        <div className="col-6">
+                          <p>Amount</p>
+                          <input type="number" value={amount} onChange={e => setAmount(e.target.value)} required /> {selectedExpense.token} <button onClick={() => setAmount(selectedExpense.amount.toString())}>Max</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bottom">
+                      <button onClick={sendPayment} className="pay">Pay</button>
+                    </div>
                   </div>
-                  <div className="bottom">
-                    <button onClick={() => paySplit()}>Pay</button>
-                  </div>
-                </div>
-              </Modal>
+                </Modal>
+                : null}
             </div>
           )) : (
             <p>No expenses</p>
