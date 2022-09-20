@@ -1,6 +1,7 @@
 # Blockshare
 
-[*Project for Evmos Momentum Hackathon*](https://evmos2022.devpost.com/)
+[*Project for Evmos Momentum Hackathon*](https://devpost.com/software/blockshare-uwhrj1)
+[*Website*](https://blockshare.app)
 
 Blockshare is a Web3 based DeFi application that lets you manage shared expenses in a decentralized way.
 
