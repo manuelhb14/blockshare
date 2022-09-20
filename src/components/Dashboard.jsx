@@ -9,7 +9,10 @@ export default function Dashboard() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [paymentModalIsOpen, setPaymentModalIsOpen] = React.useState(false);
   const [amount, setAmount] = React.useState("");
-
+  const [amountPaid, setAmountPaid] = React.useState("");
+  const [amountToPay, setAmountToPay] = React.useState("");
+  const [totalPaid, setTotalPaid] = React.useState("");
+  
   const tokenMap = {
     "EvmoSwap": "0x7cBa32163a8f4c56C846f5C3685E3b7a450c9002",
     "USDC": "0xae95d4890bf4471501E0066b6c6244E1CAaEe791",
@@ -246,6 +249,21 @@ export default function Dashboard() {
     const decimals = await contract.decimals();
     const tx = await contract.transfer(selectedExpense.owner, ethers.utils.parseUnits(amount, decimals));
     await tx.wait();
+    await fetch("https://myshare.azurewebsites.net/api/createPayment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        expenseId: selectedExpense.id,
+        amount: parseFloat(amount),
+        date: Date.now(),
+        txnHash: tx.hash,
+        network_id: 9000,
+        address: address
+      })
+    });
+    setAmount("");
     console.log("tx sent");
   }
 
@@ -268,6 +286,29 @@ export default function Dashboard() {
     }
   }
   
+  const checkOwnership = () => {
+    if (selectedExpense) {
+      return selectedExpense.owner.toLowerCase() === address.toLowerCase();
+    }
+  }
+
+  const getAmountToPay = () => {
+    selectedExpense.debtors.forEach(debtor => {
+      if (debtor.address.toLowerCase() === address.toLowerCase()) {
+        setAmount(debtor.amount);
+      }
+    });
+  }
+
+  const getAmountPaid = () => {
+    selectedExpense.payments.forEach(payment => {
+      if (payment.address.toLowerCase() === address.toLowerCase()) {
+        console.log("amount paid: " + payment.amount);
+        setAmountPaid(payment.amount);
+      }
+    })
+  }
+
   const convertDate = (timestamp) => {
     let date = new Date(timestamp * 1000);
     return date.toLocaleDateString();
@@ -351,6 +392,12 @@ export default function Dashboard() {
     }
   }, [isConnected, address, createExpense]);
 
+  useEffect(() => {
+    if (selectedExpense) {
+      getAmountToPay();
+      getAmountPaid();
+    }
+  }, [selectedExpense]);
 
   return (
     <section className="dashboard">
@@ -363,10 +410,10 @@ export default function Dashboard() {
                 <button onClick={closeModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
                 <div className="top row">
                   <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
+                    <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{checkOwnership() ? "You" : reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
-                    <button onClick={openPaymentModal} className="">Pay split</button>
+                    {checkOwnership() ? <></> : amountPaid <= amountToPay ? <button onClick={openPaymentModal} className="">Pay split</button> : <button className="disabled">Paid</button>}
                   </div>
                   <div className="col-2"></div>
                   <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
@@ -375,7 +422,7 @@ export default function Dashboard() {
                 </div>
                 <div className="middle row">
                   <div className="column col-4 col-sm-4">
-                    <p>Created</p>
+                    <p>Created at</p>
                     <p>{convertDate(selectedExpense.date)}</p>
                   </div>
                   <div className="column col-4 col-sm-4">
@@ -385,10 +432,6 @@ export default function Dashboard() {
                   <div className="column col-4 col-sm-4">
                     <p>Remaining</p>
                     <p>{getRemainingAmount()} {selectedExpense.token}</p>
-                  </div>
-                  <div className="column col-4 col-sm-4">
-                    <p>Time remaining</p>
-                    <p>{getDaysLeft(selectedExpense.timeLimit)} days</p>
                   </div>
                   <div className="column col-4 col-sm-4">
                     <p>Status</p>
@@ -425,16 +468,13 @@ export default function Dashboard() {
                             <p>{debtor.amount} {selectedExpense.token}</p>
                           </div>
                           <div className="column">
-                            <p>{debtor.amount - selectedExpense.payments.reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
+                            <p>{debtor.amount - selectedExpense.payments.filter(payment => payment.address.toLowerCase() === debtor.address.toLowerCase()).reduce((a, b) => a + b.amount, 0)} {selectedExpense.token}</p>
+                    
+                            
                           </div>
                           <div className="column">
                             <div className="date">
-                              {selectedExpense.payments.length > 0 ?
-                                <a href={`https://evm.evmos.dev/tx/${selectedExpense.payments[selectedExpense.payments.length - 1]}`}>
-                                  <p>{convertDate(selectedExpense.payments[selectedExpense.payments.length - 1].date)}</p>
-                                </a>
-                                : <p>N/A</p>
-                              }
+                              {selectedExpense.payments.filter(payment => payment.address.toLowerCase() === debtor.address.toLowerCase()).length > 0 ? convertDate(selectedExpense.payments.filter(payment => payment.address.toLowerCase() === debtor.address.toLowerCase())[0].date) : "Not paid"}
                             </div>
                           </div>
                           <div className="col status">
@@ -452,7 +492,7 @@ export default function Dashboard() {
             <div className="container-card col-12 col-sm-6 col-md-4 col-lg-3">
               <div className="cards" key={expense.id} onClick={() => openModal(expense)}>
                 <div className="top">
-                  <p className="owner">{reduceAddress(expense.owner)}</p>
+                  <p className="owner">{checkOwnership() ? "You" : reduceAddress(expense.owner)}</p>
                   <img src={expense.image} alt="expense" />
                 </div>
                 <div className="bottom container">
@@ -474,7 +514,7 @@ export default function Dashboard() {
                       <p><img src="./img/icon/coins.svg" alt="coin-icon" /><b>{expense.amount}</b> {expense.token}</p>
                     </div>
                     <div className="time-limit col-6">
-                      <p><img src="./img/icon/calendar.svg" alt="calendar-icon" /><b>{getDaysLeft(expense.timeLimit)}</b> days</p>
+                      <p><img src="./img/icon/calendar.svg" alt="calendar-icon" /><b>{convertDate(expense.date)}</b></p>
                     </div>
                   </div>
                 </div>
