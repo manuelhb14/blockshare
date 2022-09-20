@@ -13,6 +13,7 @@ Blockshare is a [**Web3 application**](https://blockshare.app) built on the [**E
 * Total to pay
 * Deadline
 * Required token
+
 It then selects the debtors addresses’ and the amount that each one will pay. Debtors then access the received expense and are able to pay the debt, be it by parts or all the debt in one transaction.
 
 Supported ecosystems:
