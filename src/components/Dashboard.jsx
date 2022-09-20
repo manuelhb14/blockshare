@@ -541,10 +541,10 @@ export default function Dashboard() {
                         <div className="form-col col-12">
                           <label for="payAmount">Amount</label>
                         </div>
-                        <div className="form-col col-10">
+                        <div className="form-col col-7 col-sm-8 col-md-10">
                           <input id="payAmount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
                         </div>
-                        <div className="form-col col-2">
+                        <div className="form-col col-5 col-sm-4 col-md-2">
                           <button className="btn-type-3" onClick={() => setAmount(selectedExpense.amount.toString())}>Max</button>
                         </div>
                       </div>
