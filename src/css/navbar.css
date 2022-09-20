@@ -16,7 +16,7 @@ nav .container .content .nav-item.right { transition: 0.5s; }
 nav .container .content .nav-item .logo { padding: .5rem 1rem; z-index: 2; }
 nav .container .content .nav-item .logo img { height: 2.5rem; width: auto; filter: var(--filterblue); }
 
-nav .container .content .nav-item .bell { height: 1.1rem; width: auto; filter: var(--filterblue); }
+nav .container .content .nav-item .bell { display: none; height: 1.1rem; width: auto; filter: var(--filterblue); }
 
 nav .container .content .nav-item .nav-a { font-size: 1rem; line-height: 1; font-weight: 500; text-decoration: none; color: var(--black); padding: 0 1.25rem; }
 
