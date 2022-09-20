@@ -85,6 +85,7 @@ body.nav-open { overflow-y: hidden; }
 
 
 .modal .modal-content .form-container {  }
+.modal .modal-content .form-container .btn-type-3 { color: var(--white); background-color: var(--blue); display: block; width: 100%; border-radius: .5rem; border: 1px solid var(--blue); outline: none; padding: .25rem .5rem; font-size: .95rem; font-weight: 400; margin-bottom: .75rem; }
 .modal .modal-content .form-container .form { position: relative; }
 .modal .modal-content .form-container .form.row {  }
 .modal .modal-content .form-container .form label { display: block; width: 100%; color: var(--black); font-size: .95rem; font-weight: 400; line-height: 1; margin-bottom: .4rem; }
