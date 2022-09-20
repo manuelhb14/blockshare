@@ -18,10 +18,10 @@ nav .container .content .nav-item .logo img { height: 1.5rem; width: auto; }
 
 nav .container .content .nav-item .bell { display: none; height: 1.1rem; width: auto; filter: var(--filterblue); }
 
-nav .container .content .nav-item .nav-a { font-size: 1rem; line-height: 1; font-weight: 500; text-decoration: none; color: var(--black); padding: 0 1.25rem; }
+nav .container .content .nav-item .nav-a { font-size: 1rem; line-height: 1; font-weight: 500; text-decoration: none; color: var(--black); padding: 0 1.25rem; cursor: pointer; }
 
-nav .btn-type-1 { font-size: 1rem; color: var(--blue); background-color: var(--lightblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--blue); outline: none; padding: .5rem .75rem; }
-nav .btn-type-2 { font-size: 1rem; color: var(--white); background-color: var(--darkblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--darkblue); outline: none; padding: .5rem .75rem; }
+nav .btn-type-1 { font-size: 1rem; color: var(--blue); background-color: var(--lightblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--blue); outline: none; padding: .5rem .75rem; cursor: pointer; }
+nav .btn-type-2 { font-size: 1rem; color: var(--white); background-color: var(--darkblue); border-radius: .5rem; line-height: 1; font-weight: 400; border: 1px solid var(--darkblue); outline: none; padding: .5rem .75rem; cursor: pointer; }
 
 /**********Large (lg)**********/
 @media (max-width: 1199.98px) {}
