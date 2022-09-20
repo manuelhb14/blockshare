@@ -1,4 +1,4 @@
-section.dashboard {  }
+section.dashboard { background-image: url('../../public/img/bg-color.png'); background-position: right; background-size: cover; background-repeat: no-repeat; min-height: 100vh; }
 section.dashboard .dashboard-container { padding-top: 4rem; }
 section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: 700; margin: 2rem 0 1rem 1rem; text-align: left; line-height: 1; }
 section.dashboard .title .link { color: var(--blue); background-color: unset; border: 0; font-size: 1.2rem; margin-left: 4rem; outline: none; }
