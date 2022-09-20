@@ -2,71 +2,55 @@
 
 [*Project for Evmos Momentum Hackathon*](https://evmos2022.devpost.com/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Blockshare is a Web3 based DeFi application that lets you manage shared expenses in a decentralized way.
 
-## Available Scripts
+## How Blockshare works 
 
-In the project directory, you can run:
+Blockshare is a [**Web3 application**](https://blockshare.app) built on the [**Evmos ecosystem**](https://evmos.org/). It is conformed by two parties, the creditor and the debtor(s). In order to get startd, the creditor connects its wallet and creates an expense which includes:
+* Title
+* Description
+* Category
+* Total to pay
+* Deadline
+* Required token
 
-### `npm start`
+It then selects the debtors addresses’ and the amount that each one will pay. Debtors then access the received expense and are able to pay the debt, be it by parts or all the debt in one transaction.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Supported ecosystems:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+At the moment Blockshare is only available to be used with Evmos ecosystem. More information can be read on the [**documentation**](https://docs.evmos.org).
 
-### `npm test`
+## Future for Blockshare
+The following features are planned to be added.
+Q4 2022
+* Implementation of Evmos Name Service (Evmos domains)
+* Custom image upload for expenses creations
+* Ability to cancel an expense with automatic refund to the parties that had paid.
+* Share link button to send expense efficiently to the debtors.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Q1 2023
+* Notifications implementation
+* Anti spam system. Only your contacts can add you to an expense.
+* Automatic swap from desired coin to expense’s coin when paying.
 
-### `npm run build`
+Q2 2023
+* Multiple blockchains compatibility.
+* Automatic creation of recurring payments.
+* Dynamic expense for constantly updating payments.
+* • And more constant updates.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contribute to the project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run the server in your local machine:
 
-### `npm run eject`
+```bash
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Open <http://localhost:3000> with your browser to see the result.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+***Blockshare is in Beta. Use at your own risk with funds you're comfortable using.***
