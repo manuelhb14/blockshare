@@ -255,10 +255,10 @@ export default function Dashboard() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        expenseId: selectedExpense.id,
+        id_expense: selectedExpense.id,
         amount: parseFloat(amount),
-        date: Date.now(),
-        txnHash: tx.hash,
+        date: Date.now() / 1000,
+        txn_hash: tx.hash,
         network_id: 9000,
         address: address
       })
@@ -399,7 +399,7 @@ export default function Dashboard() {
     if (isConnected && address) {
       getExpenses();
     }
-  }, [isConnected, address, createExpense]);
+  }, [isConnected, address, createExpense, sendPayment]);
 
   useEffect(() => {
     if (selectedExpense) {
@@ -545,7 +545,7 @@ export default function Dashboard() {
                           <input id="payAmount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
                         </div>
                         <div className="form-col col-2">
-                          <button className="btn-type-3">Max</button>
+                          <button className="btn-type-3" onClick={() => setAmount(selectedExpense.amount.toString())}>Max</button>
                         </div>
                       </div>
                       <div className="info-text row">
@@ -553,7 +553,7 @@ export default function Dashboard() {
                           <p>Network fee:</p>
                         </div>
                         <div className="col-6">
-                          <p className="text-end">0.0003 EVMOS</p>
+                          <p className="text-end">0.000052 EVMOS</p>
                         </div>
                       </div>
                       <hr />

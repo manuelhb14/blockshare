@@ -97,7 +97,7 @@ export default function Navbar() {
       status: "Pending",
       debtors: expenseDebtors.map(debtor => {
         return {
-          address: debtor.address,
+          address: debtor.address.toLowerCase(),
           amount: parseInt(debtor.amount),
         }
       }
@@ -240,7 +240,7 @@ export default function Navbar() {
                 </div>
                 <div className="form row">
                   <div className="form-col col-12">
-                    <label for="formDate">Active until</label>
+                    <label for="formDate">Date</label>
                     <input id="formDate" type="date" value={expenseDate} onChange={(e) => setExpenseDate(e.target.value)} required />
                   </div>
                 </div>
