@@ -86,7 +86,7 @@ export default function Home() {
                                     <p>• Automatic creation of recurring payments.</p>
                                 </li>
                                 <li>
-                                    <p>• Dynamic expense form.</p>
+                                    <p>• Dynamic expense for constantly updating payments.</p>
                                 </li>
                                 <li>
                                     <p>• And more constant updates.</p>
