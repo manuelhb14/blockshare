@@ -1,4 +1,4 @@
-nav {  }
+nav { position: absolute; top: 0; left: 0; right: 0; }
 nav .container {  }
 nav .container .content { display: flex; flex-direction: row; flex-wrap: nowrap; align-content: center; justify-content: space-between; align-items: center; padding: .5rem 0;  }
 nav .container .content .nav-item { display: flex; flex-direction: row; flex-wrap: wrap; align-content: center; justify-content: space-evenly; align-items: center; gap: .5rem; }
@@ -14,7 +14,7 @@ body.nav-open #nav-toggler .bar3 { -webkit-transform: rotate(45deg) translate(-6
 nav .container .content .nav-item.left {  }
 nav .container .content .nav-item.right { transition: 0.5s; }
 nav .container .content .nav-item .logo { padding: .5rem 1rem; z-index: 2; }
-nav .container .content .nav-item .logo img { height: 2.5rem; width: auto; filter: var(--filterblue); }
+nav .container .content .nav-item .logo img { height: 2.5rem; width: auto; }
 
 nav .container .content .nav-item .bell { display: none; height: 1.1rem; width: auto; filter: var(--filterblue); }
 

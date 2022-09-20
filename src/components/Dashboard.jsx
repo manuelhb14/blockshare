@@ -363,7 +363,7 @@ export default function Dashboard() {
 
   return (
     <section className="dashboard">
-      <div className="container">
+      <div className="dashboard-container container">
         <h1 className="title">My expenses<button className="link">View all expenses<img src="./img/icon/arrow.svg" alt="arrow-icon" /></button></h1>
         <div className="content row">
           {selectedExpense ? (

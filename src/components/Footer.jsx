@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="container">
-        <h4 className="title">MyShare</h4>
+        <h4 className="title">Blockshare</h4>
         <p className="text">
           Evmos Momentum Hackathon<br />led by Web3Scholarships
         </p>

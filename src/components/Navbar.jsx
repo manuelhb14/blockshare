@@ -166,7 +166,7 @@ export default function Navbar() {
       <div className="content">
         <div className="nav-item left">
           <NavLink to='/' className="logo" onClick={closeNav}>
-            <img src="img/logo/evmos-logo.svg" alt="logo" />
+            <img src="img/icon/blockshare-logo.svg" alt="logo" />
           </NavLink>
         </div>
         <div className="nav-item nav-toggle">

@@ -3,7 +3,6 @@ import { DataContext } from './context/DataContext';
 import { ethers } from 'ethers';
 
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from './pages/Home'
@@ -23,7 +22,6 @@ function App() {
           <Route path='/' element={ <Home /> } />
           <Route path='/dashboard' element={ <Dapp />} />
         </Routes>
-      <Footer />
     </Router>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../components/Footer';
 import '../css/global.css'
 import '../css/home.css'
 
@@ -20,7 +21,7 @@ export default function Home() {
                                 <NavLink to='/dashboard' className='buttons'>
                                     Launch app
                                 </NavLink>
-                                <a className='d-flex gap-2 align-items-center learn'>
+                                <a href="#roadmap" className='d-flex gap-2 align-items-center learn'>
                                     <p className='mb-0'>Learn more</p>
                                     <img src='img/icon/arrow.svg' className='arrow'>
                                     </img>
@@ -35,7 +36,7 @@ export default function Home() {
                 </div>
             </div>
         </header>
-        <section className="roadmap">
+        <section id="roadmap" className="roadmap">
             <div className="roadmap-container container">
                 <h1 className="title">Roadmap</h1>
                 <div className="content">
@@ -96,6 +97,7 @@ export default function Home() {
                 </div>
             </div>
         </section>
+        <Footer />
     </main>
   )
 }

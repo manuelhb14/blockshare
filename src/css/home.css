@@ -1,5 +1,5 @@
 main {  }
-main header { background-image: url('../../public/img/bg-color.png'); background-position: right; background-size: cover; background-repeat: no-repeat; }
+main header { background-image: url('../../public/img/bg-color.png'); background-position: right; background-size: cover; background-repeat: no-repeat; min-height: 100vh; }
 main header .container { display: flex; height: calc(100vh - 50px); align-items: center; }
 main header .container .row { margin-left: unset; margin-right: unset; }
 main header .container .row .left .bg-img { width: 100%; height: 100%; object-fit: contain; }
@@ -9,7 +9,7 @@ main header .container .row .right .arrow { width: auto; height: 1.25rem;}
 main header .container .row .right .powered { color: var(--blue); }
 main header .container .row .right .evmos-logo { height: 1.2rem;}
 
-main section.roadmap { min-height: 90vh; background-color: var(--white); display: flex; align-items: center; justify-content: center; align-content: center; flex-wrap: nowrap; flex-direction: column; }
+main section.roadmap { min-height: 80vh; background-color: var(--white); display: flex; align-items: center; justify-content: center; align-content: center; flex-wrap: nowrap; flex-direction: column; }
 main section.roadmap .roadmap-container { padding-top: 6.5rem; padding-bottom: 7rem; }
 main section.roadmap .roadmap-container .title { font-size: 2.6rem; line-height: 1; color: var(--black); margin-bottom: 3.5rem; font-weight: 700; text-align: center; }
 main section.roadmap .roadmap-container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: center; justify-content: space-around; align-items: stretch; width: 80%; margin-left: auto; margin-right: auto; padding-top: .75rem; padding-bottom: .75rem; }
