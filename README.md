@@ -19,7 +19,25 @@ Supported ecosystems:
 
 At the moment Blockshare is only available to be used with Evmos ecosystem. More information can be read on the [**documentation**](https://docs.evmos.org).
 
-# Future for Blockshare
+## Future for Blockshare
+The following features are planned to be added.
+Q4 2022
+* Implementation of Evmos Name Service (Evmos domains)
+* Custom image upload for expenses creations
+* Ability to cancel an expense with automatic refund to the parties that had paid.
+* Share link button to send expense efficiently to the debtors.
+
+Q1 2023
+* Notifications implementation
+* Anti spam system. Only your contacts can add you to an expense.
+* Automatic swap from desired coin to expense’s coin when paying.
+
+Q2 2023
+* Multiple blockchains compatibility.
+* Automatic creation of recurring payments.
+* Dynamic expense for constantly updating payments.
+* • And more constant updates.
+
 
 ## Contribute to the project
 
