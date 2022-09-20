@@ -3,7 +3,7 @@ section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: 70
 section.dashboard .title .link { color: var(--blue); background-color: unset; border: 0; font-size: 1.2rem; margin-left: 4rem; outline: none; }
 section.dashboard .title .link img { filter: var(--filterblue); width: auto; height: 1.1rem; transform: rotate(-90deg); margin-left: 1rem; }
 section.dashboard .container {  }
-section.dashboard .container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: stretch; justify-content: flex-start; align-items: stretch; margin: 0 auto; width: 100%; }
+section.dashboard .container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: stretch; justify-content: flex-start; align-items: stretch; margin: 0 auto; width: 100%; padding-bottom: 2rem; }
 /*Cards*/
 section.dashboard .container .content .container-card { padding-bottom: 1rem; padding-top: 1rem; }
 section.dashboard .container .content .container-card .cards { background-color: var(--white); box-shadow: 0px 3px 25px -20px rgba(0, 0, 0, 0.40); border-radius: 1rem; padding-left: 0; padding-right: 0; position: relative; transition: 0.5s; cursor: pointer; height: 100%; }
