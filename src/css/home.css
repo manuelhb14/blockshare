@@ -21,7 +21,7 @@ main section.roadmap .roadmap-container { padding-top: 6.5rem; padding-bottom: 7
 main section.roadmap .roadmap-container .title { font-size: 2.6rem; line-height: 1; color: var(--black); margin-bottom: 3.5rem; font-weight: 700; text-align: center; }
 main section.roadmap .roadmap-container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: center; justify-content: space-around; align-items: stretch; width: 80%; margin-left: auto; margin-right: auto; padding-top: .75rem; padding-bottom: .75rem; }
 main section.roadmap .roadmap-container .content .cards { border: 1px solid var(--blue); border-radius: .75rem; flex: 0 0 30%; width: 30%; box-shadow: 0px 0px 25px -15px rgba(0, 178, 193, 0.75); background-image: url('../../public/img/bg-color.png'); background-repeat: no-repeat; background-attachment: local; transition: 0.5s; }
-main section.roadmap .roadmap-container .content .cards:hover { transform: scale(1.02); }
+main section.roadmap .roadmap-container .content .cards:hover { transform: scale(1.01); }
 main section.roadmap .roadmap-container .content .cards:nth-child(1) { background-position: left bottom; background-size: cover; }
 main section.roadmap .roadmap-container .content .cards:nth-child(2) { background-position: center; background-size: cover; }
 main section.roadmap .roadmap-container .content .cards:nth-child(3) { background-position: right bottom; background-size: cover; }
