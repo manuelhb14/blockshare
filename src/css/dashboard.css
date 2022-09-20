@@ -1,9 +1,10 @@
-section.dashboard {  }
+section.dashboard { background-image: url('../../public/img/bg-color.png'); background-position: right; background-size: cover; background-repeat: no-repeat; min-height: 100vh; }
+section.dashboard .dashboard-container { padding-top: 4rem; }
 section.dashboard .title { color: var(--black); font-size: 2rem; font-weight: 700; margin: 2rem 0 1rem 1rem; text-align: left; line-height: 1; }
 section.dashboard .title .link { color: var(--blue); background-color: unset; border: 0; font-size: 1.2rem; margin-left: 4rem; outline: none; }
 section.dashboard .title .link img { filter: var(--filterblue); width: auto; height: 1.1rem; transform: rotate(-90deg); margin-left: 1rem; }
 section.dashboard .container {  }
-section.dashboard .container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: stretch; justify-content: flex-start; align-items: stretch; margin: 0 auto; width: 100%; }
+section.dashboard .container .content { display: flex; flex-direction: row; flex-wrap: wrap; align-content: stretch; justify-content: flex-start; align-items: stretch; margin: 0 auto; width: 100%; padding-bottom: 2rem; }
 /*Cards*/
 section.dashboard .container .content .container-card { padding-bottom: 1rem; padding-top: 1rem; }
 section.dashboard .container .content .container-card .cards { background-color: var(--white); box-shadow: 0px 3px 25px -20px rgba(0, 0, 0, 0.40); border-radius: 1rem; padding-left: 0; padding-right: 0; position: relative; transition: 0.5s; cursor: pointer; height: 100%; }
@@ -22,13 +23,13 @@ section.dashboard .container .content .container-card .cards .bottom .status p {
 section.dashboard .container .content .container-card .cards .bottom .status p.Pending { background-color: var(--yellow); }
 section.dashboard .container .content .container-card .cards .bottom .status p.Paid { background-color: var(--green); }
 section.dashboard .container .content .container-card .cards .bottom .description {  }
-section.dashboard .container .content .container-card .cards .bottom .description p { color: var(--black); font-weight: 500; font-size: 1rem; line-height: 1.2; margin-bottom: 0;  }
+section.dashboard .container .content .container-card .cards .bottom .description p { color: var(--black); font-weight: 500; font-size: 1rem; line-height: 1.2; margin-bottom: 0; }
 section.dashboard .container .content .container-card .cards .bottom .price {  }
 section.dashboard .container .content .container-card .cards .bottom .price img { width: 1rem; height: 1rem; margin-right: .5rem; filter: var(--filterblue); vertical-align: top; }
 section.dashboard .container .content .container-card .cards .bottom .price p { font-size: 1rem; line-height: 1.2; color: var(--blue); margin-bottom: 0; text-align: left; }
 section.dashboard .container .content .container-card .cards .bottom .time-limit {  }
 section.dashboard .container .content .container-card .cards .bottom .time-limit img { width: 1rem; height: 1rem; margin-right: .5rem; filter: var(--filterblue); vertical-align: top; }
-section.dashboard .container .content .container-card .cards .bottom .time-limit p { font-size: 1rem; line-height: 1.2; color: var(--blue); margin-bottom: 0; text-align: right;  }
+section.dashboard .container .content .container-card .cards .bottom .time-limit p { font-size: 1rem; line-height: 1.2; color: var(--blue); margin-bottom: 0; text-align: right; }
 
 
 /**********Large (lg)**********/

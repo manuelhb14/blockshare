@@ -166,7 +166,7 @@ export default function Navbar() {
       <div className="content">
         <div className="nav-item left">
           <NavLink to='/' className="logo" onClick={closeNav}>
-            <img src="img/logo/evmos-logo.svg" alt="logo" />
+            <img src="img/icon/blockshare-logo.svg" alt="logo" />
           </NavLink>
         </div>
         <div className="nav-item nav-toggle">
@@ -278,7 +278,7 @@ export default function Navbar() {
               </div>
               <div className="bottom row">
                 <div className="bottom-content">
-                  <button className="create-btn" type="submit">Create expense</button>
+                  <button className="submit-btn" type="submit">Create expense</button>
                 </div>
               </div>
             </form>

@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Blockshare
+
+[*Project for Evmos Momentum Hackathon*](https://evmos2022.devpost.com/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

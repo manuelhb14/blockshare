@@ -354,6 +354,15 @@ export default function Dashboard() {
     }
   }
 
+  const modalStyle2 = {
+    overlay: {
+      position: 'fixed',
+      inset: '0px',
+      backgroundColor: 'rgba(0,0,0,0.1)',
+      zIndex: '5'
+    }
+  }
+
   const getRemainingAmount = () => {
     if (selectedExpense) {
       console.log(selectedExpense);
@@ -401,7 +410,7 @@ export default function Dashboard() {
 
   return (
     <section className="dashboard">
-      <div className="container">
+      <div className="dashboard-container container">
         <h1 className="title">My expenses<button className="link">View all expenses<img src="./img/icon/arrow.svg" alt="arrow-icon" /></button></h1>
         <div className="content row">
           {selectedExpense ? (
@@ -413,7 +422,7 @@ export default function Dashboard() {
                     <p className="owner" onClick={navigator.clipboard.writeText(selectedExpense.owner)}>{checkOwnership() ? "You" : reduceAddress(selectedExpense.owner)}<img src="./img/icon/copy.svg" alt="copy address icon" /></p>
                     <h2 className="title">{selectedExpense.name}</h2>
                     <p className="description">{selectedExpense.description}</p>
-                    {checkOwnership() ? <></> : amountPaid <= amountToPay ? <button onClick={openPaymentModal} className="">Pay split</button> : <button className="disabled">Paid</button>}
+                    {checkOwnership() ? <></> : amountPaid <= amountToPay ? <button onClick={openPaymentModal} className="pay-btn">Pay split<img src="./img/icon/wallet.svg" alt="pay button icon" /></button> : <button className="disabled">Paid</button>}
                   </div>
                   <div className="col-2"></div>
                   <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
@@ -477,7 +486,7 @@ export default function Dashboard() {
                               {selectedExpense.payments.filter(payment => payment.address.toLowerCase() === debtor.address.toLowerCase()).length > 0 ? convertDate(selectedExpense.payments.filter(payment => payment.address.toLowerCase() === debtor.address.toLowerCase())[0].date) : "Not paid"}
                             </div>
                           </div>
-                          <div className="col status">
+                          <div className="column status">
                             <p className={selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}>{selectedExpense.payments.reduce((a, b) => a + b.amount, 0) === debtor.amount ? "Paid" : "Pending"}</p>
                           </div>
                         </div>
@@ -520,29 +529,41 @@ export default function Dashboard() {
                 </div>
               </div>
               {selectedExpense ?
-                <Modal isOpen={paymentModalIsOpen} onRequestClose={closePaymentModal} >
-                  <div className="modal">
+                <Modal isOpen={paymentModalIsOpen} onRequestClose={closePaymentModal} className="modal modal-2" style={modalStyle2}>
+                  <form action="javascript:void(0);" onSubmit={sendPayment} className="modal-content container needs-validation">
+                  <button onClick={closePaymentModal} className="close"><img src="./img/icon/close.svg" alt="close button icon" /></button>
                     <div className="top row">
-                      <div className="col-6">
-                        <h2 className="title">{selectedExpense.name} to {reduceAddress(selectedExpense.owner)}</h2>
-                        <p className="">Pay: {selectedExpense.amount} {selectedExpense.token}</p>
-                      </div>
-                      <div className="col-6">
-                        <button onClick={closePaymentModal} className="close">X</button>
-                      </div>
+                      <h2 className="title">{selectedExpense.name}</h2>
                     </div>
-                    <div className="middle">
-                      <div className="row">
-                        <div className="col-6">
-                          <p>Amount</p>
-                          <input type="number" value={amount} onChange={e => setAmount(e.target.value)} required /> {selectedExpense.token} <button onClick={() => setAmount(selectedExpense.amount.toString())}>Max</button>
+                    <div className="middle form-container">
+                    <button className="text" onClick={() => setAmount(selectedExpense.amount.toString())}>Pay: {selectedExpense.amount} {selectedExpense.token}</button>
+                      <div className="form row">
+                        <div className="form-col col-12">
+                          <label for="payAmount">Amount</label>
+                        </div>
+                        <div className="form-col col-10">
+                          <input id="payAmount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
+                        </div>
+                        <div className="form-col col-2">
+                          <button className="btn-type-3">Max</button>
                         </div>
                       </div>
+                      <div className="info-text row">
+                        <div className="col-6">
+                          <p>Network fee:</p>
+                        </div>
+                        <div className="col-6">
+                          <p className="text-end">0.0003 EVMOS</p>
+                        </div>
+                      </div>
+                      <hr />
                     </div>
-                    <div className="bottom">
-                      <button onClick={sendPayment} className="pay">Pay</button>
+                    <div className="bottom row">
+                      <div className="bottom-content">
+                        <button type="submit" className="pay submit-btn">Confirm</button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </Modal>
                 : null}
             </div>
